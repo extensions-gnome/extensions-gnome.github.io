@@ -96,6 +96,7 @@ function renderCatalog(extensions) {
 function openModal(ext, author) {
     document.getElementById('modal-title').textContent = ext.name;
     document.getElementById('modal-author').textContent = `by ${author}`;
+    document.getElementById('modal-uuid').textContent = ext.uuid;
     document.getElementById('modal-version').textContent = `v${ext.version || 1}`;
     document.getElementById('modal-desc').textContent = ext.description;
     

@@ -275,6 +275,13 @@ body {
     font-size: 0.9rem;
 }
 
+.uuid-label {
+    color: #999;
+    font-size: 0.75rem;
+    font-family: monospace;
+    margin-top: 2px;
+}
+
 .close {
     position: absolute;
     top: 15px;
