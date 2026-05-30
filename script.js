@@ -18,6 +18,18 @@ async function fetchExtensions() {
         if (!response.ok) throw new Error('Network response was not ok');
         allExtensions = await response.json();
         applyFilters();
+
+        // Deep linking: check if there is an extension ID in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const extId = urlParams.get('ext');
+        if (extId) {
+            const ext = allExtensions.find(e => e.uuid === extId);
+            if (ext) {
+                const parts = ext.uuid.split('@');
+                const author = parts.length > 1 ? parts[1].split('.')[0] : 'Unknown';
+                openModal(ext, author);
+            }
+        }
     } catch (error) {
         console.error('Error fetching extensions:', error);
         document.getElementById('catalog').innerHTML = '<p>Error loading the extensions catalog.</p>';
@@ -31,7 +43,6 @@ function showPage(pageId) {
         li.classList.remove('active');
         if (li.dataset.page === pageId) li.classList.add('active');
     });
-    // Scroll to top
     window.scrollTo(0, 0);
 }
 
@@ -39,7 +50,6 @@ function applyFilters() {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const sortBy = document.getElementById('sort-select').value;
 
-    // Filter
     filteredExtensions = allExtensions.filter(ext => {
         const nameMatch = ext.name.toLowerCase().includes(searchTerm);
         const descMatch = ext.description.toLowerCase().includes(searchTerm);
@@ -47,7 +57,6 @@ function applyFilters() {
         return nameMatch || descMatch || uuidMatch;
     });
 
-    // Sort
     if (sortBy === 'name') {
         filteredExtensions.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === 'recent') {
@@ -115,6 +124,10 @@ function openModal(ext, author) {
     const iconUrl = ext.icon.startsWith('http') ? ext.icon : BASE_STORAGE_URL + ext.icon;
     document.getElementById('modal-icon').src = iconUrl;
     
+    // Update URL without reload
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?ext=' + encodeURIComponent(ext.uuid);
+    window.history.pushState({path:newUrl},'',newUrl);
+
     // Audit Reports
     document.getElementById('report-ai').textContent = ext.ai_report || "Passed automated code quality audit.";
     document.getElementById('report-security').textContent = ext.security_report || "Verified clean by VirusTotal.";
@@ -140,6 +153,15 @@ function openModal(ext, author) {
         promoBtn.classList.add('hidden');
     }
 
+    const shareBtn = document.getElementById('modal-share');
+    shareBtn.onclick = () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            const hint = document.getElementById('share-hint');
+            hint.classList.remove('hidden');
+            setTimeout(() => hint.classList.add('hidden'), 2000);
+        });
+    };
+
     const installBtn = document.getElementById('modal-install');
     installBtn.onclick = () => {
         const command = `wget -qO- ${ext.zip_url} > /tmp/ext.zip && gnome-extensions install --force /tmp/ext.zip && gnome-extensions enable ${ext.uuid} && rm /tmp/ext.zip`;
@@ -153,17 +175,21 @@ function openModal(ext, author) {
     document.getElementById('modal').classList.remove('hidden');
 }
 
+function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    // Clear the ext param from URL without reload
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({path:newUrl},'',newUrl);
+}
+
 // Event Listeners
 document.getElementById('search-input').addEventListener('input', applyFilters);
 document.getElementById('sort-select').addEventListener('change', applyFilters);
-
-document.getElementById('close-modal').addEventListener('click', () => {
-    document.getElementById('modal').classList.add('hidden');
-});
+document.getElementById('close-modal').addEventListener('click', closeModal);
 
 document.getElementById('modal').addEventListener('click', (e) => {
     if (e.target.id === 'modal') {
-        document.getElementById('modal').classList.add('hidden');
+        closeModal();
     }
 });
 
