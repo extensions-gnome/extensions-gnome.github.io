@@ -24,12 +24,8 @@ async function fetchExtensions() {
 }
 
 function showPage(pageId) {
-    // Hide all pages
     document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
-    // Show selected
     document.getElementById(`page-${pageId}`).classList.remove('hidden');
-    
-    // Update active nav link
     document.querySelectorAll('.nav-links li').forEach(li => {
         li.classList.remove('active');
         if (li.dataset.page === pageId) li.classList.add('active');
@@ -57,7 +53,7 @@ function renderCatalog(extensions) {
             <img src="${iconUrl}" alt="Icon" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'48\\' height=\\'48\\'><rect width=\\'48\\' height=\\'48\\' fill=\\'%23ddd\\'/></svg>'">
             <div class="ext-info">
                 <h3>${ext.name}</h3>
-                <span class="author">by ${author}</span>
+                <span class="author">by ${author} • v${ext.version || 1}</span>
                 <p>${ext.description}</p>
             </div>
         `;
@@ -69,6 +65,7 @@ function renderCatalog(extensions) {
 function openModal(ext, author) {
     document.getElementById('modal-title').textContent = ext.name;
     document.getElementById('modal-author').textContent = `by ${author}`;
+    document.getElementById('modal-version').textContent = `v${ext.version || 1}`;
     document.getElementById('modal-desc').textContent = ext.description;
     
     const iconUrl = ext.icon.startsWith('http') ? ext.icon : BASE_STORAGE_URL + ext.icon;
