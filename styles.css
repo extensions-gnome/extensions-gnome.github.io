@@ -304,6 +304,39 @@ body {
     border-radius: 4px;
 }
 
+.audit-results {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.audit-results h3 {
+    font-size: 1rem;
+    margin: 0 0 15px 0;
+    color: var(--gnome-blue-dark);
+}
+
+.report-item {
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 4px solid var(--gnome-blue);
+}
+
+.report-header {
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.report-content {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
 .actions {
     display: flex;
     gap: 12px;

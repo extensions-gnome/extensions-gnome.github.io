@@ -72,6 +72,10 @@ function openModal(ext, author) {
     document.getElementById('modal-desc').textContent = ext.description;
     document.getElementById('modal-icon').src = `../${ext.icon}`;
     
+    // Audit Reports
+    document.getElementById('report-ai').textContent = ext.ai_report || "Audit in progress or results pending.";
+    document.getElementById('report-security').textContent = ext.security_report || "Verification in progress.";
+
     const slider = document.getElementById('modal-slider');
     slider.innerHTML = '';
     if (ext.demos && ext.demos.length > 0) {
