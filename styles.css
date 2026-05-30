@@ -101,6 +101,10 @@ body {
     font-weight: bold;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* Info Box (Official Style) */
 .info-box-official {
     background-color: var(--official-info-bg);
