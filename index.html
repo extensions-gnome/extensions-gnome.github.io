@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Unofficial Disclaimer Banner -->
+    <!-- Unofficial Disclaimer Banner (Slimmer) -->
     <div class="unofficial-banner">
         <i class="fas fa-info-circle banner-info-icon"></i> <strong>UNOFFICIAL:</strong> This is a community-driven initiative and is not affiliated with the GNOME Foundation.
     </div>
@@ -46,32 +46,33 @@
         </div>
     </nav>
 
+    <!-- Mini-Hero Section -->
+    <header class="mini-hero">
+        <div class="container hero-content">
+            <h1>The Community Extension Store</h1>
+            <p>Fast-track publication for GNOME Shell extensions with automated security auditing and no browser plugins required.</p>
+            <div class="hero-actions">
+                <a href="#developers" onclick="showPage('developers')" class="btn btn-hero">Publish your Extension <i class="fas fa-upload"></i></a>
+            </div>
+        </div>
+    </header>
+
     <div class="container main-content">
         <!-- Home Page -->
         <div id="page-home" class="page-content">
-            <div class="info-box">
-                <div class="info-icon"><i class="fas fa-lightbulb"></i></div>
-                <div class="info-text">
-                    To install extensions from the <strong>GNOME Beta Store</strong>, you don't need browser plugins. Simply click an extension and copy the <strong>Installation Command</strong> to paste it into your terminal.
-                </div>
-            </div>
-
             <div class="search-section">
                 <div class="search-container">
                     <span class="search-icon"><i class="fas fa-search"></i></span>
-                    <input type="text" id="search-input" placeholder="Search extensions...">
+                    <input type="text" id="search-input" placeholder="Search extensions by name, author or description...">
                 </div>
             </div>
 
             <div class="list-controls">
-                <div class="pagination">
-                    <span class="page active">1</span>
-                </div>
+                <div id="results-count" class="results-info">Loading extensions...</div>
                 <div class="sorting">
                     Sort by <select id="sort-select">
-                        <option>Popularity</option>
-                        <option>Name</option>
-                        <option>Recent</option>
+                        <option value="recent">Recent</option>
+                        <option value="name">Name</option>
                     </select>
                 </div>
             </div>

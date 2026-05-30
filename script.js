@@ -4,6 +4,7 @@ const REPO_A_URL = BASE_STORAGE_URL + 'extensions.json';
 const LOCAL_JSON = 'extensions.json'; 
 
 let allExtensions = [];
+let filteredExtensions = [];
 
 async function fetchExtensions() {
     try {
@@ -16,7 +17,7 @@ async function fetchExtensions() {
         
         if (!response.ok) throw new Error('Network response was not ok');
         allExtensions = await response.json();
-        renderCatalog(allExtensions);
+        applyFilters();
     } catch (error) {
         console.error('Error fetching extensions:', error);
         document.getElementById('catalog').innerHTML = '<p>Error loading the extensions catalog.</p>';
@@ -30,6 +31,38 @@ function showPage(pageId) {
         li.classList.remove('active');
         if (li.dataset.page === pageId) li.classList.add('active');
     });
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+function applyFilters() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const sortBy = document.getElementById('sort-select').value;
+
+    // Filter
+    filteredExtensions = allExtensions.filter(ext => {
+        const nameMatch = ext.name.toLowerCase().includes(searchTerm);
+        const descMatch = ext.description.toLowerCase().includes(searchTerm);
+        const uuidMatch = ext.uuid.toLowerCase().includes(searchTerm);
+        return nameMatch || descMatch || uuidMatch;
+    });
+
+    // Sort
+    if (sortBy === 'name') {
+        filteredExtensions.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'recent') {
+        // Assuming newest are at the end of the JSON or we could add a date field
+        // For now, let's reverse the array for 'recent'
+        filteredExtensions.reverse();
+    }
+
+    renderCatalog(filteredExtensions);
+    updateResultsCount(filteredExtensions.length);
+}
+
+function updateResultsCount(count) {
+    const el = document.getElementById('results-count');
+    el.textContent = `${count} extension${count !== 1 ? 's' : ''} found`;
 }
 
 function renderCatalog(extensions) {
@@ -37,7 +70,7 @@ function renderCatalog(extensions) {
     catalog.innerHTML = '';
 
     if (extensions.length === 0) {
-        catalog.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">No extensions found.</p>';
+        catalog.innerHTML = '<p style="padding: 40px; text-align: center; color: #666; font-style: italic;">No extensions match your search.</p>';
         return;
     }
 
@@ -109,16 +142,9 @@ function openModal(ext, author) {
     document.getElementById('modal').classList.remove('hidden');
 }
 
-// Search functionality
-document.getElementById('search-input').addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = allExtensions.filter(ext => 
-        ext.name.toLowerCase().includes(term) || 
-        ext.description.toLowerCase().includes(term) ||
-        ext.uuid.toLowerCase().includes(term)
-    );
-    renderCatalog(filtered);
-});
+// Event Listeners
+document.getElementById('search-input').addEventListener('input', applyFilters);
+document.getElementById('sort-select').addEventListener('change', applyFilters);
 
 document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('modal').classList.add('hidden');
