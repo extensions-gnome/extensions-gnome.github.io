@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GNOME Beta Store - Unofficial Community Extensions</title>
+    <title>unofficial beta extensions store</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="An automated community store for GNOME Shell extensions. Built to solve the official review bottleneck, providing fast-track updates and secure community-vetted extensions.">
-    <meta name="keywords" content="GNOME, GNOME Shell, Extensions, Beta Store, GJS, Linux, Desktop, Automation">
-    <meta name="author" content="GNOME Beta Store Community">
+    <meta name="description" content="An automated community store for desktop extensions. Built to solve review bottlenecks, providing fast-track updates and secure community-vetted code.">
+    <meta name="keywords" content="extensions, beta store, automation, community, unofficial">
+    <meta name="author" content="beta extensions store community">
     
     <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/289196605?s=200&v=4">
     
     <!-- Social Media Meta Tags (Open Graph) -->
-    <meta property="og:title" content="GNOME Beta Store - Unofficial Community Extensions">
-    <meta property="og:description" content="Discover and install GNOME Shell extensions via an automated community pipeline. No browser plugins required.">
+    <meta property="og:title" content="unofficial beta extensions store">
+    <meta property="og:description" content="Discover and install extensions via an automated community pipeline. No browser plugins required.">
     <meta property="og:image" content="https://avatars.githubusercontent.com/u/289196605?s=200&v=4">
     <meta property="og:url" content="https://extensions-gnome.github.io/">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GNOME Beta Store">
-    <meta name="twitter:description" content="Fast-tracked GNOME Shell extensions with automated security auditing.">
+    <meta name="twitter:title" content="unofficial beta extensions store">
+    <meta name="twitter:description" content="Fast-tracked extensions with automated security auditing.">
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/289196605?s=200&v=4">
 
     <link rel="stylesheet" href="styles.css">
@@ -32,13 +32,13 @@
 <body>
     <!-- Unofficial Disclaimer Banner -->
     <div class="unofficial-banner">
-        <i class="fas fa-info-circle banner-info-icon"></i> <strong>UNOFFICIAL:</strong> This is a community-driven initiative and is not affiliated with the GNOME Foundation.
+        <i class="fas fa-info-circle banner-info-icon"></i> <strong>unofficial:</strong> This is a community-driven initiative and is not affiliated with any official foundation.
     </div>
 
     <nav class="navbar">
         <div class="container nav-content">
             <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
-                <img src="logo.svg" alt="GNOME Beta Store Logo" class="gnome-logo" onerror="this.src='https://www.gnome.org/wp-content/themes/gnome-2021/assets/images/gnome-logo.svg'">
+                <span class="logo-text">BETA <span class="thin">EXTENSIONS STORE</span></span>
             </div>
             <ul class="nav-links">
                 <li class="active" data-page="home"><a href="#" onclick="showPage('home')">Extensions</a></li>
@@ -54,7 +54,7 @@
             <div class="info-box-official">
                 <div class="info-icon"><i class="far fa-lightbulb"></i></div>
                 <div class="info-text">
-                    The <strong>GNOME Beta Store</strong> was created as a response to the long waiting list for official GNOME extension reviews. 
+                    The <strong>beta extensions store</strong> was created as a response to the long waiting list for official review processes. 
                     To maximize security, every extension is audited by an <strong>AI Agent</strong> and scanned by <strong>VirusTotal</strong>. 
                     <a href="#developers" onclick="showPage('developers')" class="publish-link">Click here to upload your extension.</a>
                 </div>
@@ -85,11 +85,11 @@
         <!-- About Page -->
         <div id="page-about" class="page-content hidden">
             <div class="static-page">
-                <h2>About GNOME Beta Store</h2>
-                <p><strong>GNOME Beta Store</strong> is an <strong>unofficial</strong> community initiative.</p>
-                <p>It was created as a response to the official review bottleneck. We automate security using AI and VirusTotal so that code is available immediately.</p>
+                <h2>About the beta extensions store</h2>
+                <p>This is an <strong>unofficial</strong> community initiative.</p>
+                <p>It was created as a response to review bottlenecks. We automate security using AI and VirusTotal so that code is available immediately.</p>
                 <div class="warning-alert">
-                    <i class="fas fa-exclamation-triangle"></i> This platform is not affiliated with the GNOME Foundation. Use at your own risk.
+                    <i class="fas fa-exclamation-triangle"></i> This platform is not affiliated with any official foundation. Use at your own risk.
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
         <div id="page-developers" class="page-content hidden">
             <div class="static-page">
                 <h2>Developers Guide</h2>
-                <p>Publishing on the GNOME Beta Store is entirely handled through GitHub Issues. Our automated bot processes your requests in real-time.</p>
+                <p>Publishing is a process 100% based on GitHub.</p>
                 
                 <h3>Available Request Types</h3>
                 <div class="guide-grid">
@@ -116,7 +116,7 @@
                     </div>
                     <div class="guide-item">
                         <h4>🗑️ Delete Extension</h4>
-                        <p>Request the permanent removal of your extension. You must provide the UUID shown in the details modal. Only the owner or the store admin (@jaimegh-es) can authorize a deletion.</p>
+                        <p>Request the permanent removal of your extension. You must provide the UUID shown in the details modal. Only the owner or the store admin can authorize a deletion.</p>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                 <p>Once you open an issue, the bot starts a multi-step verification:</p>
                 <ul>
                     <li><strong>Asset Validation:</strong> Checks if all required files are present and reachable.</li>
-                    <li><strong>AI Code Review:</strong> Powered by Llama-3, it analyzes your GJS code for security risks and best practices.</li>
+                    <li><strong>AI Code Review:</strong> Powered by Llama-3, it analyzes the code for security risks and best practices.</li>
                     <li><strong>Malware Scan:</strong> Your ZIP is scanned by 70+ antivirus engines via VirusTotal.</li>
                     <li><strong>Instant Publication:</strong> If all checks pass, your extension is live on this site within minutes!</li>
                 </ul>
