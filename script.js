@@ -1,12 +1,19 @@
 // URL settings
-const REPO_A_URL = 'https://raw.githubusercontent.com/owner/gnome-beta-store/main/extensions.json';
-const LOCAL_JSON = '../extensions.json';
+const REPO_A_URL = 'https://raw.githubusercontent.com/extensions-gnome/store/main/extensions.json';
+const LOCAL_JSON = 'extensions.json'; // Set to localized path for production or local testing
 
 let allExtensions = [];
 
 async function fetchExtensions() {
     try {
-        const response = await fetch(LOCAL_JSON); 
+        // Try production URL first, then local if it fails
+        let response;
+        try {
+            response = await fetch(REPO_A_URL);
+        } catch(e) {
+            response = await fetch(LOCAL_JSON);
+        }
+        
         if (!response.ok) throw new Error('Network response was not ok');
         allExtensions = await response.json();
         renderCatalog(allExtensions);

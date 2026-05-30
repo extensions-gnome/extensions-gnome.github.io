@@ -1,211 +1,144 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>GNOME Beta Store</title>
-        <link rel="stylesheet" href="styles.css" />
-        <!-- FontAwesome -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
-    </head>
-    <body>
-        <nav class="navbar">
-            <div class="container nav-content">
-                <div class="logo">
-                    <img
-                        src="logo.svg"
-                        alt="GNOME Beta Store Logo"
-                        class="gnome-logo"
-                        onerror="
-                            this.src =
-                                'https://www.gnome.org/wp-content/themes/gnome-2021/assets/images/gnome-logo.svg'
-                        "
-                    />
-                </div>
-                <ul class="nav-links">
-                    <li class="active" data-page="home">
-                        <a href="#" onclick="showPage('home')">Extensions</a>
-                    </li>
-                    <li data-page="developers">
-                        <a href="#" onclick="showPage('developers')"
-                            >Developers Guide</a
-                        >
-                    </li>
-                    <li data-page="about">
-                        <a href="#" onclick="showPage('about')">About</a>
-                    </li>
-                </ul>
-                <div class="nav-right">
-                    <!-- No login button per user request -->
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GNOME Beta Store - Unofficial Community Extensions</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="An automated, unofficial community store for GNOME Shell extensions. Fast-track updates and discover community-vetted extensions without the review bottleneck.">
+    <meta name="keywords" content="GNOME, GNOME Shell, Extensions, Beta Store, GJS, Linux, Desktop, Automation">
+    <meta name="author" content="GNOME Beta Store Community">
+    
+    <!-- Social Media Meta Tags (Open Graph) -->
+    <meta property="og:title" content="GNOME Beta Store - Unofficial Community Extensions">
+    <meta property="og:description" content="Discover and install GNOME Shell extensions via an automated community pipeline. No browser plugins required.">
+    <meta property="og:image" content="https://extensions-gnome.github.io/logo.svg">
+    <meta property="og:url" content="https://extensions-gnome.github.io/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GNOME Beta Store">
+    <meta name="twitter:description" content="Fast-tracked GNOME Shell extensions with automated security auditing.">
+    <meta name="twitter:image" content="https://extensions-gnome.github.io/logo.svg">
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Unofficial Disclaimer Banner -->
+    <div class="unofficial-banner">
+        <i class="fas fa-info-circle"></i> <strong>UNOFFICIAL:</strong> This is a community-driven initiative and is not affiliated with the GNOME Foundation.
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <img src="logo.svg" alt="GNOME Beta Store Logo" class="gnome-logo" onerror="this.src='https://www.gnome.org/wp-content/themes/gnome-2021/assets/images/gnome-logo.svg'">
+                <span class="logo-text">BETA STORE</span>
             </div>
-        </nav>
+            <ul class="nav-links">
+                <li class="active" data-page="home"><a href="#" onclick="showPage('home')">Extensions</a></li>
+                <li data-page="developers"><a href="#" onclick="showPage('developers')">Developers Guide</a></li>
+                <li data-page="about"><a href="#" onclick="showPage('about')">About</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <div class="container main-content">
-            <!-- Home Page -->
-            <div id="page-home" class="page-content">
-                <div class="info-box">
-                    <div class="info-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <div class="info-text">
-                        To install extensions from the
-                        <strong>GNOME Beta Store</strong>, you don't need
-                        browser plugins. Simply click an extension and copy the
-                        <strong>Installation Command</strong> to paste it into
-                        your terminal.
-                    </div>
-                </div>
-
-                <div class="search-section">
-                    <div class="search-container">
-                        <span class="search-icon"
-                            ><i class="fas fa-search"></i
-                        ></span>
-                        <input
-                            type="text"
-                            id="search-input"
-                            placeholder="Search extensions..."
-                        />
-                    </div>
-                </div>
-
-                <div class="list-controls">
-                    <div class="pagination">
-                        <span class="page active">1</span>
-                    </div>
-                    <div class="sorting">
-                        Sort by
-                        <select id="sort-select">
-                            <option>Popularity</option>
-                            <option>Name</option>
-                            <option>Recent</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="catalog" class="catalog-list">
-                    <!-- Extension list items will be injected here -->
+    <div class="container main-content">
+        <!-- Home Page -->
+        <div id="page-home" class="page-content">
+            <div class="info-box">
+                <div class="info-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="info-text">
+                    To install extensions from the <strong>GNOME Beta Store</strong>, you don't need browser plugins. Simply click an extension and copy the <strong>Installation Command</strong> to paste it into your terminal.
                 </div>
             </div>
 
-            <!-- About Page -->
-            <div id="page-about" class="page-content hidden">
-                <div class="static-page">
-                    <h2>About GNOME Beta Store</h2>
-                    <p>
-                        <strong>GNOME Beta Store</strong> is a community-driven
-                        and <strong>unofficial</strong> initiative.
-                    </p>
-                    <p>
-                        This project was born as a response to the current
-                        overload of the review process in the official GNOME
-                        extensions catalog. The bottleneck created by the
-                        limited number of human reviewers often results in waits
-                        of weeks or months for the publication of critical
-                        updates or new features.
-                    </p>
-                    <p>
-                        Our mission is to provide an alternative, automated, and
-                        secure channel that allows developers to publish their
-                        work immediately after passing an automated audit based
-                        on AI and malware analysis.
-                    </p>
-                    <div class="warning-alert">
-                        <i class="fas fa-exclamation-triangle"></i> This
-                        platform is not affiliated with the GNOME Foundation.
-                        Use extensions at your own risk.
-                    </div>
+            <div class="search-section">
+                <div class="search-container">
+                    <span class="search-icon"><i class="fas fa-search"></i></span>
+                    <input type="text" id="search-input" placeholder="Search extensions...">
                 </div>
             </div>
 
-            <!-- Developers Page -->
-            <div id="page-developers" class="page-content hidden">
-                <div class="static-page">
-                    <h2>Developers Guide</h2>
-                    <p>
-                        Publishing on GNOME Beta Store is a 100% GitHub-based
-                        process, with no need for external accounts.
-                    </p>
-                    <ol>
-                        <li>Go to our backend repository on GitHub.</li>
-                        <li>
-                            Open a new <strong>Issue</strong> using the "Upload
-                            / Update Extension" template.
-                        </li>
-                        <li>
-                            Fill out the form: UUID, Name, Description, and
-                            attach your ZIP file, icon, and screenshots.
-                        </li>
-                        <li>
-                            Our bot will run an automated audit:
-                            <ul>
-                                <li>
-                                    <strong>Code Analysis (AI):</strong> Checks
-                                    for GJS compatibility and best practices.
-                                </li>
-                                <li>
-                                    <strong>Security:</strong> Full analysis on
-                                    VirusTotal.
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            If the audit is successful, your extension will be
-                            automatically published on this website within
-                            minutes.
-                        </li>
-                    </ol>
-                    <a
-                        href="https://github.com/owner/gnome-beta-store/issues/new/choose"
-                        target="_blank"
-                        class="btn btn-primary"
-                        >Go to Repository <i class="fab fa-github"></i
-                    ></a>
+            <div class="list-controls">
+                <div class="pagination">
+                    <span class="page active">1</span>
+                </div>
+                <div class="sorting">
+                    Sort by <select id="sort-select">
+                        <option>Popularity</option>
+                        <option>Name</option>
+                        <option>Recent</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="catalog" class="catalog-list">
+                <!-- Extension list items will be injected here -->
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="page-about" class="page-content hidden">
+            <div class="static-page">
+                <h2>About GNOME Beta Store</h2>
+                <p><strong>GNOME Beta Store</strong> is a community-driven and <strong>unofficial</strong> initiative.</p>
+                <p>This project was born as a response to the current overload of the review process in the official GNOME extensions catalog. The bottleneck created by the limited number of human reviewers often results in waits of weeks or months for the publication of critical updates or new features.</p>
+                <p>Our mission is to provide an alternative, automated, and secure channel that allows developers to publish their work immediately after passing an automated audit based on AI and malware analysis.</p>
+                <div class="warning-alert">
+                    <i class="fas fa-exclamation-triangle"></i> This platform is not affiliated with the GNOME Foundation. Use extensions at your own risk.
                 </div>
             </div>
         </div>
 
-        <!-- Modal for details -->
-        <div id="modal" class="modal hidden">
-            <div class="modal-content">
-                <span id="close-modal" class="close"
-                    ><i class="fas fa-times"></i
-                ></span>
-                <div class="modal-header">
-                    <img id="modal-icon" src="" alt="" />
-                    <div>
-                        <h2 id="modal-title"></h2>
-                        <span id="modal-author" class="author"></span>
-                    </div>
-                </div>
-                <div id="modal-slider" class="slider"></div>
-                <p id="modal-desc"></p>
-                <div class="actions">
-                    <a id="modal-github" href="#" target="_blank" class="btn"
-                        >GitHub <i class="fab fa-github"></i
-                    ></a>
-                    <a
-                        id="modal-promo"
-                        href="#"
-                        target="_blank"
-                        class="btn hidden"
-                        >Website <i class="fas fa-external-link-alt"></i
-                    ></a>
-                    <button id="modal-install" class="btn btn-primary">
-                        Copy Command <i class="fas fa-terminal"></i>
-                    </button>
-                </div>
-                <div id="install-hint" class="hint hidden">
-                    <i class="fas fa-check"></i> Copied! Paste this command into
-                    your terminal.
-                </div>
+        <!-- Developers Page -->
+        <div id="page-developers" class="page-content hidden">
+            <div class="static-page">
+                <h2>Developers Guide</h2>
+                <p>Publishing on GNOME Beta Store is a 100% GitHub-based process, with no need for external accounts.</p>
+                <ol>
+                    <li>Go to our storage repository on GitHub.</li>
+                    <li>Open a new <strong>Issue</strong> using the "Upload / Update Extension" template.</li>
+                    <li>Fill out the form: UUID, Name, Description, and attach your ZIP file, icon, and screenshots.</li>
+                    <li>Our bot will run an automated audit:
+                        <ul>
+                            <li><strong>Code Analysis (AI):</strong> Checks for GJS compatibility and best practices.</li>
+                            <li><strong>Security:</strong> Full analysis on VirusTotal.</li>
+                        </ul>
+                    </li>
+                    <li>If the audit is successful, your extension will be automatically published on this website within minutes.</li>
+                </ol>
+                <a href="https://github.com/extensions-gnome/store/issues/new/choose" target="_blank" class="btn btn-primary">Go to Repository <i class="fab fa-github"></i></a>
             </div>
         </div>
+    </div>
 
-        <script src="script.js"></script>
-    </body>
+    <!-- Modal for details -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal" class="close"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <img id="modal-icon" src="" alt="">
+                <div>
+                    <h2 id="modal-title"></h2>
+                    <span id="modal-author" class="author"></span>
+                </div>
+            </div>
+            <div id="modal-slider" class="slider"></div>
+            <p id="modal-desc"></p>
+            <div class="actions">
+                <a id="modal-github" href="#" target="_blank" class="btn">GitHub <i class="fab fa-github"></i></a>
+                <a id="modal-promo" href="#" target="_blank" class="btn hidden">Website <i class="fas fa-external-link-alt"></i></a>
+                <button id="modal-install" class="btn btn-primary">Copy Command <i class="fas fa-terminal"></i></button>
+            </div>
+            <div id="install-hint" class="hint hidden"><i class="fas fa-check"></i> Copied! Paste this command into your terminal.</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
