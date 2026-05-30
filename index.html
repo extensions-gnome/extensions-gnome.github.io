@@ -95,13 +95,40 @@
         <div id="page-developers" class="page-content hidden">
             <div class="static-page">
                 <h2>Developers Guide</h2>
-                <p>Publishing is a process 100% based on GitHub.</p>
-                <ol>
-                    <li>Go to our storage repository.</li>
-                    <li>Open an <strong>Issue</strong> with the corresponding template.</li>
-                    <li>Upload your ZIP and images. Our bot will do the rest.</li>
-                </ol>
-                <a href="https://github.com/extensions-gnome/store/issues/new/choose" target="_blank" class="btn btn-primary-official">Go to Repository <i class="fab fa-github"></i></a>
+                <p>Publishing on the GNOME Beta Store is entirely handled through GitHub Issues. Our automated bot processes your requests in real-time.</p>
+
+                <h3>Available Request Types</h3>
+                <div class="guide-grid">
+                    <div class="guide-item">
+                        <h4>🆕 New Extension</h4>
+                        <p>Use this for your initial submission. You'll need to provide the UUID, name, description, ZIP file, icon, and screenshots. The first person to submit an extension becomes its authorized owner.</p>
+                    </div>
+                    <div class="guide-item">
+                        <h4>🚀 Update ZIP (New Version)</h4>
+                        <p>The fastest way to update. Just upload the new ZIP file. The bot automatically extracts the UUID and version from your <code>metadata.json</code>. Only the owner can perform this action.</p>
+                    </div>
+                    <div class="guide-item">
+                        <h4>📝 Edit Metadata</h4>
+                        <p>Change your extension's description, icon, or screenshots without uploading a new ZIP. This skips the code audit for a faster update. Only the owner can perform this action.</p>
+                    </div>
+                    <div class="guide-item">
+                        <h4>🗑️ Delete Extension</h4>
+                        <p>Request the permanent removal of your extension. You must provide the UUID shown in the details modal. Only the owner or the store admin (@jaimegh-es) can authorize a deletion.</p>
+                    </div>
+                </div>
+
+                <h3>The Audit Process</h3>
+                <p>Once you open an issue, the bot starts a multi-step verification:</p>
+                <ul>
+                    <li><strong>Asset Validation:</strong> Checks if all required files are present and reachable.</li>
+                    <li><strong>AI Code Review:</strong> Powered by Llama-3, it analyzes your GJS code for security risks and best practices.</li>
+                    <li><strong>Malware Scan:</strong> Your ZIP is scanned by 70+ antivirus engines via VirusTotal.</li>
+                    <li><strong>Instant Publication:</strong> If all checks pass, your extension is live on this site within minutes!</li>
+                </ul>
+
+                <div style="margin-top: 30px;">
+                    <a href="https://github.com/extensions-gnome/store/issues/new/choose" target="_blank" class="btn btn-primary-official">Open a Request on GitHub <i class="fab fa-github"></i></a>
+                </div>
             </div>
         </div>
     </div>

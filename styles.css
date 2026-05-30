@@ -94,6 +94,66 @@ body {
     display: none !important;
 }
 
+.static-page {
+    padding: 40px 0;
+    line-height: 1.6;
+}
+
+.static-page h2 {
+    color: var(--gnome-blue-dark);
+    margin-bottom: 25px;
+}
+
+.static-page h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.guide-item {
+    background: #fdfdfd;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.guide-item h4 {
+    margin: 0 0 10px 0;
+    color: var(--gnome-blue-dark);
+}
+
+.guide-item p {
+    font-size: 0.85rem;
+    margin: 0;
+    color: #666;
+}
+
+.static-page ol {
+    margin: 25px 0;
+    padding-left: 20px;
+}
+
+.static-page li {
+    margin-bottom: 12px;
+}
+
+.warning-alert {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
 /* Info Box (Official Style) */
 .info-box-official {
     background-color: var(--official-info-bg);
