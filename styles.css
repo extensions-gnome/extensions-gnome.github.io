@@ -270,6 +270,13 @@ body {
     font-size: 0.85rem;
 }
 
+.shell-compat {
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 3px;
+    font-weight: bold;
+}
+
 /* Modal */
 .modal {
     position: fixed;
@@ -319,16 +326,23 @@ body {
     font-size: 1.4rem;
 }
 
-.version-badge {
-    background: #eee;
+.badge-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.version-badge, .shell-badge {
     color: #666;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     padding: 2px 8px;
     border-radius: 10px;
     width: fit-content;
-    margin-top: 5px;
     font-weight: bold;
 }
+
+.version-badge { background: #eee; }
+.shell-badge { background: #e0f0ff; color: #2a76dd; }
 
 .author {
     color: #888;

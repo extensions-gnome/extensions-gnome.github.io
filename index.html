@@ -54,7 +54,8 @@
             <div class="info-box-official">
                 <div class="info-icon"><i class="far fa-lightbulb"></i></div>
                 <div class="info-text">
-                    This is the <strong>GNOME Beta Store</strong>. Here you can publish your extensions instantly after an automated AI audit. 
+                    The <strong>GNOME Beta Store</strong> was created as a response to the long waiting list for official GNOME extension reviews. 
+                    To maximize security, every extension is audited by an <strong>AI Agent</strong> and scanned by <strong>VirusTotal</strong>. 
                     <a href="#developers" onclick="showPage('developers')" class="publish-link">Click here to upload your extension.</a>
                 </div>
             </div>
@@ -98,7 +99,7 @@
             <div class="static-page">
                 <h2>Developers Guide</h2>
                 <p>Publishing on the GNOME Beta Store is entirely handled through GitHub Issues. Our automated bot processes your requests in real-time.</p>
-
+                
                 <h3>Available Request Types</h3>
                 <div class="guide-grid">
                     <div class="guide-item">
@@ -145,7 +146,10 @@
                     <h2 id="modal-title"></h2>
                     <span id="modal-author" class="author"></span>
                     <span id="modal-uuid" class="uuid-label"></span>
-                    <span id="modal-version" class="version-badge"></span>
+                    <div class="badge-container">
+                        <span id="modal-version" class="version-badge"></span>
+                        <span id="modal-shell" class="shell-badge"></span>
+                    </div>
                 </div>
             </div>
             <div id="modal-slider" class="slider"></div>

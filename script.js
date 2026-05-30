@@ -80,11 +80,14 @@ function renderCatalog(extensions) {
         const author = parts.length > 1 ? parts[1].split('.')[0] : 'Unknown';
         const iconUrl = ext.icon.startsWith('http') ? ext.icon : BASE_STORAGE_URL + ext.icon;
 
+        const shellVers = ext.shell_version ? ext.shell_version.join(', ') : 'Unknown';
+
         item.innerHTML = `
             <img src="${iconUrl}" alt="Icon" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'48\\' height=\\'48\\'><rect width=\\'48\\' height=\\'48\\' fill=\\'%23ddd\\'/></svg>'">
             <div class="ext-info">
                 <h3>${ext.name}</h3>
                 <span class="author">by ${author} • v${ext.version || 1}</span>
+                <div class="shell-compat">Supports Shell: ${shellVers}</div>
                 <p>${ext.description}</p>
             </div>
         `;
@@ -98,6 +101,15 @@ function openModal(ext, author) {
     document.getElementById('modal-author').textContent = `by ${author}`;
     document.getElementById('modal-uuid').textContent = ext.uuid;
     document.getElementById('modal-version').textContent = `v${ext.version || 1}`;
+    
+    const shellEl = document.getElementById('modal-shell');
+    if (ext.shell_version && ext.shell_version.length > 0) {
+        shellEl.textContent = `Shell: ${ext.shell_version.join(', ')}`;
+        shellEl.classList.remove('hidden');
+    } else {
+        shellEl.classList.add('hidden');
+    }
+
     document.getElementById('modal-desc').textContent = ext.description;
     
     const iconUrl = ext.icon.startsWith('http') ? ext.icon : BASE_STORAGE_URL + ext.icon;
