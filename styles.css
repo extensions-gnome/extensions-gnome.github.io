@@ -49,17 +49,6 @@ body {
     height: 32px;
 }
 
-.logo-text {
-    font-weight: 800;
-    font-size: 0.9rem;
-    letter-spacing: -0.5px;
-    color: white;
-}
-
-.logo-text .thin {
-    font-weight: 300;
-}
-
 .nav-links {
     list-style: none;
     display: flex;

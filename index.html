@@ -35,14 +35,13 @@
 
     <nav class="navbar">
         <div class="container nav-content">
-            <div class="logo">
+            <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
                 <img src="logo.svg" alt="GNOME Beta Store Logo" class="gnome-logo" onerror="this.src='https://www.gnome.org/wp-content/themes/gnome-2021/assets/images/gnome-logo.svg'">
-                <span class="logo-text">GNOME <span class="thin">EXTENSIONS</span></span>
             </div>
             <ul class="nav-links">
                 <li class="active" data-page="home"><a href="#" onclick="showPage('home')">Extensions</a></li>
-                <li data-page="developers"><a href="#" onclick="showPage('developers')">Añadir la suya</a></li>
-                <li data-page="about"><a href="#" onclick="showPage('about')">Acerca de</a></li>
+                <li data-page="developers"><a href="#" onclick="showPage('developers')">Add yours</a></li>
+                <li data-page="about"><a href="#" onclick="showPage('about')">About</a></li>
             </ul>
         </div>
     </nav>
@@ -53,24 +52,24 @@
             <div class="info-box-official">
                 <div class="info-icon"><i class="far fa-lightbulb"></i></div>
                 <div class="info-text">
-                    Esta es la <strong>GNOME Beta Store</strong>. Aquí puedes publicar tus extensiones de forma instantánea tras una auditoría automática por IA. 
-                    <a href="#developers" onclick="showPage('developers')" class="publish-link">Pulsa aquí para subir tu extensión.</a>
+                    This is the <strong>GNOME Beta Store</strong>. Here you can publish your extensions instantly after an automated AI audit. 
+                    <a href="#developers" onclick="showPage('developers')" class="publish-link">Click here to upload your extension.</a>
                 </div>
             </div>
 
             <div class="search-section">
                 <div class="search-container">
                     <span class="search-icon"><i class="fas fa-search"></i></span>
-                    <input type="text" id="search-input" placeholder="Buscar extensiones...">
+                    <input type="text" id="search-input" placeholder="Search extensions...">
                 </div>
             </div>
 
             <div class="list-controls-official">
-                <div id="results-count" class="results-info">Cargando...</div>
+                <div id="results-count" class="results-info">Loading...</div>
                 <div class="sorting">
-                    Ordenar por <select id="sort-select">
-                        <option value="recent">Recientes</option>
-                        <option value="name">Nombre</option>
+                    Sort by <select id="sort-select">
+                        <option value="recent">Recent</option>
+                        <option value="name">Name</option>
                     </select>
                 </div>
             </div>
@@ -83,11 +82,11 @@
         <!-- About Page -->
         <div id="page-about" class="page-content hidden">
             <div class="static-page">
-                <h2>Acerca de GNOME Beta Store</h2>
-                <p><strong>GNOME Beta Store</strong> es una iniciativa comunitaria <strong>no oficial</strong>.</p>
-                <p>Nace como respuesta al cuello de botella en las revisiones oficiales. Automatizamos la seguridad mediante IA y VirusTotal para que el código esté disponible al momento.</p>
+                <h2>About GNOME Beta Store</h2>
+                <p><strong>GNOME Beta Store</strong> is an <strong>unofficial</strong> community initiative.</p>
+                <p>It was created as a response to the official review bottleneck. We automate security using AI and VirusTotal so that code is available immediately.</p>
                 <div class="warning-alert">
-                    <i class="fas fa-exclamation-triangle"></i> Esta plataforma no está afiliada a la GNOME Foundation. Úsala bajo tu propio riesgo.
+                    <i class="fas fa-exclamation-triangle"></i> This platform is not affiliated with the GNOME Foundation. Use at your own risk.
                 </div>
             </div>
         </div>
@@ -95,14 +94,14 @@
         <!-- Developers Page -->
         <div id="page-developers" class="page-content hidden">
             <div class="static-page">
-                <h2>Guía para Desarrolladores</h2>
-                <p>Publicar es un proceso basado 100% en GitHub.</p>
+                <h2>Developers Guide</h2>
+                <p>Publishing is a process 100% based on GitHub.</p>
                 <ol>
-                    <li>Ve a nuestro repositorio de almacenamiento.</li>
-                    <li>Abre un <strong>Issue</strong> con la plantilla correspondiente.</li>
-                    <li>Sube tu ZIP e imágenes. Nuestro bot hará el resto.</li>
+                    <li>Go to our storage repository.</li>
+                    <li>Open an <strong>Issue</strong> with the corresponding template.</li>
+                    <li>Upload your ZIP and images. Our bot will do the rest.</li>
                 </ol>
-                <a href="https://github.com/extensions-gnome/store/issues/new/choose" target="_blank" class="btn btn-primary-official">Ir al Repositorio <i class="fab fa-github"></i></a>
+                <a href="https://github.com/extensions-gnome/store/issues/new/choose" target="_blank" class="btn btn-primary-official">Go to Repository <i class="fab fa-github"></i></a>
             </div>
         </div>
     </div>
@@ -123,23 +122,23 @@
             <p id="modal-desc"></p>
             
             <div class="audit-results">
-                <h3><i class="fas fa-shield-alt"></i> Reportes de Auditoría</h3>
+                <h3><i class="fas fa-shield-alt"></i> Audit Reports</h3>
                 <div class="report-item">
-                    <div class="report-header"><i class="fas fa-robot"></i> Calidad de Código (IA)</div>
+                    <div class="report-header"><i class="fas fa-robot"></i> Code Quality (AI)</div>
                     <div id="report-ai" class="report-content"></div>
                 </div>
                 <div class="report-item">
-                    <div class="report-header"><i class="fas fa-virus-slash"></i> Seguridad (VirusTotal)</div>
+                    <div class="report-header"><i class="fas fa-virus-slash"></i> Security (VirusTotal)</div>
                     <div id="report-security" class="report-content"></div>
                 </div>
             </div>
 
             <div class="actions">
                 <a id="modal-github" href="#" target="_blank" class="btn">GitHub <i class="fab fa-github"></i></a>
-                <a id="modal-promo" href="#" target="_blank" class="btn hidden">Sitio Web <i class="fas fa-external-link-alt"></i></a>
-                <button id="modal-install" class="btn btn-primary-official">Copiar Comando <i class="fas fa-terminal"></i></button>
+                <a id="modal-promo" href="#" target="_blank" class="btn hidden">Website <i class="fas fa-external-link-alt"></i></a>
+                <button id="modal-install" class="btn btn-primary-official">Copy Command <i class="fas fa-terminal"></i></button>
             </div>
-            <div id="install-hint" class="hint hidden"><i class="fas fa-check"></i> ¡Copiado! Pega el comando en tu terminal.</div>
+            <div id="install-hint" class="hint hidden"><i class="fas fa-check"></i> Copied! Paste the command into your terminal.</div>
         </div>
     </div>
 

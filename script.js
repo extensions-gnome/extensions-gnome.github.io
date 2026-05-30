@@ -51,8 +51,6 @@ function applyFilters() {
     if (sortBy === 'name') {
         filteredExtensions.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === 'recent') {
-        // Assuming newest are at the end of the JSON or we could add a date field
-        // For now, let's reverse the array for 'recent'
         filteredExtensions.reverse();
     }
 
