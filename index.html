@@ -1,328 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Unofficial Beta Extensions Store for gnome shell</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unofficial community extensions store</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="An automated community store for desktop extensions. Built to solve review bottlenecks, providing fast-track updates and secure community-vetted code.">
+    <meta name="keywords" content="extensions, community store, automation, community, unofficial">
+    <meta name="author" content="community extensions store collective">
+    
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/289196605?s=200&v=4">
+    
+    <!-- Social Media Meta Tags (Open Graph) -->
+    <meta property="og:title" content="unofficial community extensions store">
+    <meta property="og:description" content="Discover and install extensions via an automated community pipeline. No browser plugins required.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/289196605?s=200&v=4">
+    <meta property="og:url" content="https://extensions-gnome.github.io/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="unofficial community extensions store">
+    <meta name="twitter:description" content="Fast-tracked extensions with automated security auditing.">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/289196605?s=200&v=4">
 
-        <!-- SEO Meta Tags -->
-        <meta
-            name="description"
-            content="An automated community store for desktop extensions. Built to solve review bottlenecks, providing fast-track updates and secure community-vetted code."
-        />
-        <meta
-            name="keywords"
-            content="extensions, beta store, automation, community, unofficial"
-        />
-        <meta name="author" content="beta extensions store community" />
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Unofficial Disclaimer Banner -->
+    <div class="unofficial-banner">
+        <i class="fas fa-info-circle banner-info-icon"></i> <strong>unofficial:</strong> This is a community-driven initiative and is not affiliated with any official foundation.
+    </div>
 
-        <link
-            rel="icon"
-            type="image/png"
-            href="https://avatars.githubusercontent.com/u/289196605?s=200&v=4"
-        />
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo" onclick="showPage('home')" style="cursor: pointer;">
+                <span class="logo-text">COMMUNITY <span class="thin">EXTENSIONS STORE</span></span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="home"><a href="#" onclick="showPage('home')">Extensions</a></li>
+                <li data-page="developers"><a href="#" onclick="showPage('developers')">Add yours</a></li>
+                <li data-page="about"><a href="#" onclick="showPage('about')">About</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <!-- Social Media Meta Tags (Open Graph) -->
-        <meta
-            property="og:title"
-            content="Unofficial Beta Extensions Store for gnome shell"
-        />
-        <meta
-            property="og:description"
-            content="Publish and discover fresh and updated extensions reviewed by Virustotal and AI Agents."
-        />
-        <meta
-            property="og:image"
-            content="https://avatars.githubusercontent.com/u/289196605?s=200&v=4"
-        />
-        <meta property="og:url" content="https://extensions-gnome.github.io/" />
-        <meta property="og:type" content="website" />
+    <div class="container main-content">
+        <!-- Home Page -->
+        <div id="page-home" class="page-content">
+            <div class="info-box-official">
+                <div class="info-icon"><i class="far fa-lightbulb"></i></div>
+                <div class="info-text">
+                    The <strong>community extensions store</strong> was created as a response to the long waiting list for official review processes. 
+                    To maximize security, every extension is audited by an <strong>AI Agent</strong> and scanned by <strong>VirusTotal</strong>. 
+                    <a href="#developers" onclick="showPage('developers')" class="publish-link">Click here to upload your extension.</a>
+                </div>
+            </div>
 
-        <!-- Twitter Card Meta Tags -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-            name="twitter:title"
-            content="Unofficial Beta Extensions Store for gnome shell"
-        />
-        <meta
-            name="twitter:description"
-            content="Publish and discover fresh and updated extensions reviewed by Virustotal and AI Agents."
-        />
-        <meta
-            name="twitter:image"
-            content="https://avatars.githubusercontent.com/u/289196605?s=200&v=4"
-        />
+            <div class="search-section">
+                <div class="search-container">
+                    <span class="search-icon"><i class="fas fa-search"></i></span>
+                    <input type="text" id="search-input" placeholder="Search extensions...">
+                </div>
+            </div>
 
-        <link rel="stylesheet" href="styles.css" />
-        <!-- FontAwesome -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
-    </head>
-    <body>
-        <!-- Unofficial Disclaimer Banner -->
-        <div class="unofficial-banner">
-            <i class="fas fa-info-circle banner-info-icon"></i>
-            <strong>Unofficial:</strong> This is a community-driven initiative
-            and is not affiliated with GNOME foundation.
+            <div class="list-controls-official">
+                <div id="results-count" class="results-info">Loading...</div>
+                <div class="sorting">
+                    Sort by <select id="sort-select">
+                        <option value="recent">Recent</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="catalog" class="catalog-list">
+                <!-- Extension list items will be injected here -->
+            </div>
         </div>
 
-        <nav class="navbar">
-            <div class="container nav-content">
-                <div
-                    class="logo"
-                    onclick="showPage('home')"
-                    style="cursor: pointer"
-                >
-                    <span class="logo-text"
-                        >BETA
-                        <span class="thin"
-                            >EXTENSIONS for gnome shell</span
-                        ></span
-                    >
+        <!-- About Page -->
+        <div id="page-about" class="page-content hidden">
+            <div class="static-page">
+                <h2>About the community extensions store</h2>
+                <p>This is an <strong>unofficial</strong> community initiative.</p>
+                <p>It was created as a response to review bottlenecks. We automate security using AI and VirusTotal so that code is available immediately.</p>
+                <div class="warning-alert">
+                    <i class="fas fa-exclamation-triangle"></i> This platform is not affiliated with any official foundation. Use at your own risk.
                 </div>
-                <ul class="nav-links">
-                    <li class="active" data-page="home">
-                        <a href="#" onclick="showPage('home')">Extensions</a>
-                    </li>
-                    <li data-page="developers">
-                        <a href="#" onclick="showPage('developers')"
-                            >Add yours</a
-                        >
-                    </li>
-                    <li data-page="about">
-                        <a href="#" onclick="showPage('about')">About</a>
-                    </li>
+            </div>
+        </div>
+
+        <!-- Developers Page -->
+        <div id="page-developers" class="page-content hidden">
+            <div class="static-page">
+                <h2>Developers Guide</h2>
+                <p>Publishing on the community extensions store is entirely handled through GitHub Issues. Our automated bot processes your requests in real-time.</p>
+                
+                <h3>Available Request Types</h3>
+                <div class="guide-grid">
+                    <div class="guide-item">
+                        <h4>🆕 New Extension</h4>
+                        <p>Use this for your initial submission. You'll need to provide the UUID, name, description, ZIP file, icon, and screenshots. The first person to submit an extension becomes its authorized owner.</p>
+                    </div>
+                    <div class="guide-item">
+                        <h4>🚀 Update ZIP (New Version)</h4>
+                        <p>The fastest way to update. Just upload the new ZIP file. The bot automatically extracts the UUID and version from your <code>metadata.json</code>. Only the owner can perform this action.</p>
+                    </div>
+                    <div class="guide-item">
+                        <h4>📝 Edit Metadata</h4>
+                        <p>Change your extension's description, icon, or screenshots without uploading a new ZIP. This skips the code audit for a faster update. Only the owner can perform this action.</p>
+                    </div>
+                    <div class="guide-item">
+                        <h4>🗑️ Delete Extension</h4>
+                        <p>Request the permanent removal of your extension. You must provide the UUID shown in the details modal. Only the owner or the store admin can authorize a deletion.</p>
+                    </div>
+                </div>
+
+                <h3>The Audit Process</h3>
+                <p>Once you open an issue, the bot starts a multi-step verification:</p>
+                <ul>
+                    <li><strong>Asset Validation:</strong> Checks if all required files are present and reachable.</li>
+                    <li><strong>AI Code Review:</strong> Powered by Llama-3, it analyzes the code for security risks and best practices.</li>
+                    <li><strong>Malware Scan:</strong> Your ZIP is scanned by 70+ antivirus engines via VirusTotal.</li>
+                    <li><strong>Instant Publication:</strong> If all checks pass, your extension is live on this site within minutes!</li>
                 </ul>
-            </div>
-        </nav>
 
-        <div class="container main-content">
-            <!-- Home Page -->
-            <div id="page-home" class="page-content">
-                <div class="info-box-official">
-                    <div class="info-icon">
-                        <i class="far fa-lightbulb"></i>
-                    </div>
-                    <div class="info-text">
-                        The <strong>beta extensions store</strong> was created
-                        as a response to the long waiting list for official
-                        review processes and a way to help reviewers. To
-                        maximize security, every extension is audited by an
-                        <strong>AI Agent</strong> and scanned by
-                        <strong>VirusTotal</strong>.
-                        <a
-                            href="#developers"
-                            onclick="showPage('developers')"
-                            class="publish-link"
-                            >Click here to upload your extension.</a
-                        >
-                    </div>
-                </div>
-
-                <div class="search-section">
-                    <div class="search-container">
-                        <span class="search-icon"
-                            ><i class="fas fa-search"></i
-                        ></span>
-                        <input
-                            type="text"
-                            id="search-input"
-                            placeholder="Search extensions..."
-                        />
-                    </div>
-                </div>
-
-                <div class="list-controls-official">
-                    <div id="results-count" class="results-info">
-                        Loading...
-                    </div>
-                    <div class="sorting">
-                        Sort by
-                        <select id="sort-select">
-                            <option value="recent">Recent</option>
-                            <option value="name">Name</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="catalog" class="catalog-list">
-                    <!-- Extension list items will be injected here -->
-                </div>
-            </div>
-
-            <!-- About Page -->
-            <div id="page-about" class="page-content hidden">
-                <div class="static-page">
-                    <h2>About the beta extensions store</h2>
-                    <p>
-                        This is an <strong>unofficial</strong> community
-                        initiative.
-                    </p>
-                    <p>
-                        It was created as a response to review bottlenecks. We
-                        automate security using AI and VirusTotal so that code
-                        is available immediately.
-                    </p>
-                    <div class="warning-alert">
-                        <i class="fas fa-exclamation-triangle"></i> This
-                        platform is not affiliated with any official foundation.
-                        Use at your own risk.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Developers Page -->
-            <div id="page-developers" class="page-content hidden">
-                <div class="static-page">
-                    <h2>Developers Guide</h2>
-                    <p>Publishing is a process 100% based on GitHub.</p>
-
-                    <h3>Available Request Types</h3>
-                    <div class="guide-grid">
-                        <div class="guide-item">
-                            <h4>🆕 New Extension</h4>
-                            <p>
-                                Use this for your initial submission. You'll
-                                need to provide the UUID, name, description, ZIP
-                                file, icon, and screenshots. The first person to
-                                submit an extension becomes its authorized
-                                owner.
-                            </p>
-                        </div>
-                        <div class="guide-item">
-                            <h4>🚀 Update ZIP (New Version)</h4>
-                            <p>
-                                The fastest way to update. Just upload the new
-                                ZIP file. The bot automatically extracts the
-                                UUID and version from your
-                                <code>metadata.json</code>. Only the owner can
-                                perform this action.
-                            </p>
-                        </div>
-                        <div class="guide-item">
-                            <h4>📝 Edit Metadata</h4>
-                            <p>
-                                Change your extension's description, icon, or
-                                screenshots without uploading a new ZIP. This
-                                skips the code audit for a faster update. Only
-                                the owner can perform this action.
-                            </p>
-                        </div>
-                        <div class="guide-item">
-                            <h4>🗑️ Delete Extension</h4>
-                            <p>
-                                Request the permanent removal of your extension.
-                                You must provide the UUID shown in the details
-                                modal. Only the owner or the store admin can
-                                authorize a deletion.
-                            </p>
-                        </div>
-                    </div>
-
-                    <h3>The Audit Process</h3>
-                    <p>
-                        Once you open an issue, the bot starts a multi-step
-                        verification:
-                    </p>
-                    <ul>
-                        <li>
-                            <strong>Asset Validation:</strong> Checks if all
-                            required files are present and reachable.
-                        </li>
-                        <li>
-                            <strong>AI Code Review:</strong> Powered by Llama-3,
-                            it analyzes the code for security risks and best
-                            practices.
-                        </li>
-                        <li>
-                            <strong>Malware Scan:</strong> Your ZIP is scanned
-                            by 70+ antivirus engines via VirusTotal.
-                        </li>
-                        <li>
-                            <strong>Instant Publication:</strong> If all checks
-                            pass, your extension is live on this site within
-                            minutes!
-                        </li>
-                    </ul>
-
-                    <div style="margin-top: 30px">
-                        <a
-                            href="https://github.com/extensions-gnome/store/issues/new/choose"
-                            target="_blank"
-                            class="btn btn-primary-official"
-                            >Open a Request on GitHub
-                            <i class="fab fa-github"></i
-                        ></a>
-                    </div>
+                <div style="margin-top: 30px;">
+                    <a href="https://github.com/extensions-gnome/store/issues/new/choose" target="_blank" class="btn btn-primary-official">Open a Request on GitHub <i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal for details -->
-        <div id="modal" class="modal hidden">
-            <div class="modal-content">
-                <span id="close-modal" class="close"
-                    ><i class="fas fa-times"></i
-                ></span>
-                <div class="modal-header">
-                    <img id="modal-icon" src="" alt="" />
-                    <div class="modal-title-box">
-                        <h2 id="modal-title"></h2>
-                        <span id="modal-author" class="author"></span>
-                        <span id="modal-uuid" class="uuid-label"></span>
-                        <div class="badge-container">
-                            <span
-                                id="modal-version"
-                                class="version-badge"
-                            ></span>
-                            <span id="modal-shell" class="shell-badge"></span>
-                        </div>
+    <!-- Modal for details -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal" class="close"><i class="fas fa-times"></i></span>
+            <div class="modal-header">
+                <img id="modal-icon" src="" alt="">
+                <div class="modal-title-box">
+                    <h2 id="modal-title"></h2>
+                    <span id="modal-author" class="author"></span>
+                    <span id="modal-uuid" class="uuid-label"></span>
+                    <div class="badge-container">
+                        <span id="modal-version" class="version-badge"></span>
+                        <span id="modal-shell" class="shell-badge"></span>
                     </div>
-                </div>
-                <div id="modal-slider" class="slider"></div>
-                <p id="modal-desc"></p>
-
-                <div class="audit-results">
-                    <h3><i class="fas fa-shield-alt"></i> Audit Reports</h3>
-                    <div class="report-item">
-                        <div class="report-header">
-                            <i class="fas fa-robot"></i> Code Quality (AI)
-                        </div>
-                        <div id="report-ai" class="report-content"></div>
-                    </div>
-                    <div class="report-item">
-                        <div class="report-header">
-                            <i class="fas fa-virus-slash"></i> Security
-                            (VirusTotal)
-                        </div>
-                        <div id="report-security" class="report-content"></div>
-                    </div>
-                </div>
-
-                <div class="actions">
-                    <a id="modal-github" href="#" target="_blank" class="btn"
-                        >GitHub <i class="fab fa-github"></i
-                    ></a>
-                    <a
-                        id="modal-promo"
-                        href="#"
-                        target="_blank"
-                        class="btn hidden"
-                        >Website <i class="fas fa-external-link-alt"></i
-                    ></a>
-                    <button id="modal-install" class="btn btn-primary-official">
-                        Copy Command <i class="fas fa-terminal"></i>
-                    </button>
-                </div>
-                <div id="install-hint" class="hint hidden">
-                    <i class="fas fa-check"></i> Copied! Paste the command into
-                    your terminal.
                 </div>
             </div>
-        </div>
+            <div id="modal-slider" class="slider"></div>
+            <p id="modal-desc"></p>
+            
+            <div class="audit-results">
+                <h3><i class="fas fa-shield-alt"></i> Audit Reports</h3>
+                <div class="report-item">
+                    <div class="report-header"><i class="fas fa-robot"></i> Code Quality (AI)</div>
+                    <div id="report-ai" class="report-content"></div>
+                </div>
+                <div class="report-item">
+                    <div class="report-header"><i class="fas fa-virus-slash"></i> Security (VirusTotal)</div>
+                    <div id="report-security" class="report-content"></div>
+                </div>
+            </div>
 
-        <script src="script.js"></script>
-    </body>
+            <div class="actions">
+                <a id="modal-github" href="#" target="_blank" class="btn">GitHub <i class="fab fa-github"></i></a>
+                <a id="modal-promo" href="#" target="_blank" class="btn hidden">Website <i class="fas fa-external-link-alt"></i></a>
+                <button id="modal-install" class="btn btn-primary-official">Copy Command <i class="fas fa-terminal"></i></button>
+            </div>
+            <div id="install-hint" class="hint hidden"><i class="fas fa-check"></i> Copied! Paste the command into your terminal.</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
