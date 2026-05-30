@@ -60,9 +60,9 @@ body {
     letter-spacing: 0.5px;
 }
 
-.unofficial-banner i {
+.banner-info-icon {
     margin-right: 8px;
-    color: #ffcc00;
+    color: var(--gnome-blue);
 }
 
 .hidden {
