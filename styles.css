@@ -14,6 +14,8 @@ body {
     padding: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .container {
@@ -85,9 +87,10 @@ body {
     background-color: #000;
     color: #fff;
     text-align: center;
-    padding: 4px 0;
+    padding: 6px 15px;
     font-size: 0.7rem;
     font-weight: bold;
+    line-height: 1.2;
 }
 
 .hidden {
@@ -249,6 +252,7 @@ body {
 .extension-item img {
     width: 42px;
     height: 42px;
+    flex-shrink: 0;
 }
 
 .ext-info h3 {
@@ -374,6 +378,8 @@ body {
 
 .slider img {
     max-height: 300px;
+    max-width: 100%;
+    object-fit: contain;
     border: 1px solid var(--border-color);
 }
 
@@ -440,4 +446,89 @@ body {
     color: #2e7d32;
     font-size: 0.85rem;
     font-weight: bold;
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .navbar {
+        height: auto;
+        min-height: 45px;
+    }
+
+    .nav-content {
+        flex-direction: column;
+        padding: 10px 15px;
+    }
+
+    .logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .nav-links {
+        height: auto;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links li a {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+    }
+
+    .info-box-official {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .info-icon {
+        font-size: 1.5rem;
+    }
+
+    .guide-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 0.8rem;
+    }
+
+    .logo-text .thin {
+        display: none;
+    }
+
+    .nav-links li a {
+        font-size: 0.75rem;
+        padding: 0 5px;
+    }
+
+    .list-controls-official {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
 }
