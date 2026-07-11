@@ -10,7 +10,7 @@ async function fetchExtensions() {
     try {
         let response;
         try {
-            response = await fetch(REPO_A_URL);
+            response = await fetch(REPO_A_URL + '?t=' + Date.now());
         } catch(e) {
             response = await fetch(LOCAL_JSON);
         }
@@ -130,7 +130,18 @@ function openModal(ext, author) {
 
     // Audit Reports
     const reportAiEl = document.getElementById('report-ai');
-    reportAiEl.textContent = ext.ai_report || "Passed automated code quality audit.";
+    if (ext.ai_report) {
+        // Escape HTML to prevent XSS and replace newlines with <br>
+        const escaped = ext.ai_report
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        reportAiEl.innerHTML = escaped.replace(/\n/g, '<br>');
+    } else {
+        reportAiEl.textContent = "Passed automated code quality audit.";
+    }
     document.getElementById('report-security').textContent = ext.security_report || "Verified clean by VirusTotal.";
 
     // Highlight AI report card left border if there are flagged warnings (orange instead of blue)
