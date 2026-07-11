@@ -172,6 +172,9 @@ function openModal(ext, author) {
         });
     };
 
+    const quickInstallBtn = document.getElementById('modal-quick-install');
+    quickInstallBtn.href = `gnome-ext://install/${ext.uuid}`;
+
     document.getElementById('modal').classList.remove('hidden');
 }
 
@@ -180,6 +183,15 @@ function closeModal() {
     // Clear the ext param from URL without reload
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     window.history.pushState({path:newUrl},'',newUrl);
+}
+
+function copyCliCommand() {
+    const cmd = document.getElementById('cli-install-cmd').textContent;
+    navigator.clipboard.writeText(cmd).then(() => {
+        const hint = document.getElementById('cli-copy-hint');
+        hint.style.display = 'inline';
+        setTimeout(() => hint.style.display = 'none', 3000);
+    });
 }
 
 // Event Listeners

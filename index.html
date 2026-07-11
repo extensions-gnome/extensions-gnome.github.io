@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Community Extensions for GNOME Shell | Unofficial store</title>
+        <meta name="google-site-verification" content="fR3rnSjeNHtAixKBz10XkoFs498k8wBIEYGCQ1rUvCg" />
 
         <!-- SEO Meta Tags -->
         <meta
@@ -83,6 +84,9 @@
                 <ul class="nav-links">
                     <li class="active" data-page="home">
                         <a href="#" onclick="showPage('home')">Extensions</a>
+                    </li>
+                    <li data-page="cli">
+                        <a href="#" onclick="showPage('cli')">CLI Helper</a>
                     </li>
                     <li data-page="developers">
                         <a href="#" onclick="showPage('developers')"
@@ -186,9 +190,60 @@
                         Use at your own risk.
                     </div>
                 </div>
-            </div>
+        </div>
 
-            <!-- Developers Page -->
+        <!-- CLI Helper Page -->
+        <div id="page-cli" class="page-content hidden">
+            <div class="static-page">
+                <h2>CLI Helper & Web Integration</h2>
+                <p>
+                    The <strong>CLI Helper</strong> is a lightweight utility that integrates this web catalog directly with your desktop system. It allows you to install extensions with a single click and keeps them updated in the background.
+                </p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>One-Click Install:</strong> Click "Quick Install" on any extension, and it will install and enable automatically.</li>
+                    <li><strong>Auto-Updates:</strong> A background systemd timer checks for updates and keeps your extensions up-to-date automatically.</li>
+                    <li><strong>Secure:</strong> The CLI only downloads and installs extensions verified and indexed in the official store repository database.</li>
+                </ul>
+
+                <h3>Easy Setup</h3>
+                <p>Run this one-liner command in your terminal to download the CLI, register the browser protocol handler, and configure automatic hourly updates:</p>
+                
+                <div style="background: #272c34; color: #abb2bf; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 0.9rem; position: relative; margin: 15px 0;">
+                    <code style="word-break: break-all; display: block;" id="cli-install-cmd">curl -sSL https://raw.githubusercontent.com/extensions-gnome/store/main/gnome-ext-cli -o /tmp/gnome-ext-cli && chmod +x /tmp/gnome-ext-cli && /tmp/gnome-ext-cli register && /tmp/gnome-ext-cli setup-autoupdate && rm /tmp/gnome-ext-cli</code>
+                    <button onclick="copyCliCommand()" style="position: absolute; right: 10px; top: 10px; background: #3e4452; border: none; color: #fff; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">Copy</button>
+                </div>
+                <span id="cli-copy-hint" style="color: green; font-size: 0.85rem; font-weight: bold; display: none;"><i class="fas fa-check"></i> Copied to clipboard!</span>
+
+                <h3>Manual CLI Usage</h3>
+                <p>You can also use the command line tool manually:</p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #ddd; text-align: left;">
+                            <th style="padding: 8px;">Command</th>
+                            <th style="padding: 8px;">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 8px; font-family: monospace;">gnome-ext-cli check-updates</td>
+                            <td style="padding: 8px;">Check for available updates in the store.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 8px; font-family: monospace;">gnome-ext-cli update --all</td>
+                            <td style="padding: 8px;">Update all installed extensions.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 8px; font-family: monospace;">gnome-ext-cli install [uuid]</td>
+                            <td style="padding: 8px;">Install a specific extension by its UUID.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Developers Page -->
             <div id="page-developers" class="page-content hidden">
                 <div class="static-page">
                     <h2>Developers Guide</h2>
@@ -334,9 +389,15 @@
                     <button id="modal-share" class="btn">
                         Direct Link <i class="fas fa-link"></i>
                     </button>
-                    <button id="modal-install" class="btn btn-primary-official">
+                    <a id="modal-quick-install" href="#" class="btn btn-primary-official">
+                        Quick Install <i class="fas fa-magic"></i>
+                    </a>
+                    <button id="modal-install" class="btn">
                         Copy Command <i class="fas fa-terminal"></i>
                     </button>
+                </div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: right;">
+                    Quick Install requires the <a href="#" onclick="closeModal(); showPage('cli'); return false;" style="color: var(--gnome-blue); text-decoration: underline;">CLI Helper</a>.
                 </div>
                 <div id="share-hint" class="hint hidden">
                     <i class="fas fa-check"></i> Link copied!
