@@ -129,8 +129,19 @@ function openModal(ext, author) {
     window.history.pushState({path:newUrl},'',newUrl);
 
     // Audit Reports
-    document.getElementById('report-ai').textContent = ext.ai_report || "Passed automated code quality audit.";
+    const reportAiEl = document.getElementById('report-ai');
+    reportAiEl.textContent = ext.ai_report || "Passed automated code quality audit.";
     document.getElementById('report-security').textContent = ext.security_report || "Verified clean by VirusTotal.";
+
+    // Highlight AI report card left border if there are flagged warnings (orange instead of blue)
+    const reportItemAi = reportAiEl.closest('.report-item');
+    if (reportItemAi) {
+        if (ext.ai_report && ext.ai_report.includes('Flagged')) {
+            reportItemAi.style.borderLeft = '3px solid #f57c00'; // Orange for warnings
+        } else {
+            reportItemAi.style.borderLeft = '3px solid var(--gnome-blue)'; // Default blue
+        }
+    }
 
     const slider = document.getElementById('modal-slider');
     slider.innerHTML = '';

@@ -411,6 +411,7 @@ body {
 .report-content {
     font-size: 0.85rem;
     color: #666;
+    white-space: pre-wrap;
 }
 
 .actions {
@@ -532,3 +533,5 @@ body {
         align-items: flex-start;
     }
 }
+
+
